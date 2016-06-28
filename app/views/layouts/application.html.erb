@@ -12,8 +12,12 @@
 	<div id='container'>
       <div id="user_nav">
         <% if current_user %>
-          Logged in as <strong><%= current_user.handle %></strong>
-          <%= link_to "Log Out", logout_path %>
+		  <% if current_user.guest? %>
+		    <%= link_to 'Become a member', signup_path %>
+		  <% else %>
+            Logged in as <strong><%= current_user.handle %></strong>
+			<%= link_to "Log Out", logout_path %>
+		  <% end %>
         <% else %>
           <%= link_to "Log In", login_path %>
         <% end %>
